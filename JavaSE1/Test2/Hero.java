@@ -12,7 +12,7 @@ public class Hero {
         return armor;
     }
     // 坑队友
-    void keng() {
+    void eat() {
         System.out.println("坑队友");
     }
     // 增加移动速度
@@ -48,7 +48,7 @@ public class Hero {
         System.out.println("盖伦的血量是：" + galen.hp);
         galen.recovery(100);
         System.out.println("盖伦的血量是：" + galen.hp);
-        galen.keng();
+        galen.eat();
         System.out.println("提莫的护甲值是：" + timor.getArmor());
     }
 }
