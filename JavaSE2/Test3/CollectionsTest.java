@@ -47,7 +47,7 @@ public class CollectionsTest {
         heroList.addLast(new Hero("hero3", 250, 90));
         heroList.addLast(new Hero("hero4", 240, 300));
         // 定义比较器 Comparator，重写 int compare(Hero h1, Hero h2) 方法
-        // 也可以让 Hero 实现 Comparator 接口，重写 int compareTo(Hero anotherHero) 方法
+        // 也可以让 Hero 实现 Comparable 接口，重写 int compareTo(Hero anotherHero) 方法
         Comparator<Hero> myCom = new Comparator<>() {
             @Override
             public int compare(Hero h1, Hero h2) {
