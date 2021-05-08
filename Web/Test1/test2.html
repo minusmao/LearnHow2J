@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<!-- HTML：基本元素 -->
+<html>
+    <head>
+        <title>HTML：基本元素</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    </head>
+    <body>
+        <!-- 标题 -->
+        <h1>标题 1</h1>
+        <h2>标题 2</h2>
+        <h3>标题 3</h3>
+        <h4>标题 4</h4>
+        <h5>标题 5</h5>
+        <h6>标题 6</h6>
+        <!-- 段落 -->
+        <p>段落 4</p>
+        <p>段落 5</p>
+        <p>段落 6</p>
+        <!-- 粗体 -->
+        <p>无粗体效果</p>
+        <b>b 标签粗体效果</b><br/>
+        <strong>strong 标签粗体效果</strong>
+        <!-- 斜体 -->
+        <p>无斜体效果</p>
+        <i>使用 i 标签带来的斜体效果</i><br/>
+        <em>使用 em 标签带来的斜体效果</em><br/>
+        <b><i>同时有粗体和斜体</i></b>
+        <!-- 预格式 -->
+        <p>这里是没有用预格式的情况：</p>
+        public class HelloWorld {
+            public static void main(String[] args) {
+                System.out.println("Hello World");
+            }
+        }
+        <br/>
+        <p>使用预格式的情况:</p>
+        <pre>
+        public class HelloWorld {
+            public static void main(String[] args) {
+                System.out.println("Hello World");
+            }
+        }
+        </pre>
+        <!-- 删除效果 -->
+        <p>无删除效果</p>
+        <del>使用del标签实现的删除效果</del><br/>
+        <s>使用s标签实现的删除效果，但是不建议使用，因为很多浏览器不支持s标签</s>
+        <!-- 下划线 -->
+        <p>无下划线效果</p>
+        <ins>使用ins标签实现的下划线效果</ins><br/>
+        <u>使用u标签实现的下划线效果，但是不建议使用</u>
+        <!-- 阶段性练习 1 -->
+        <h1>英雄联盟（电子竞技类游戏）</h1>
+        <p><strong>《英雄联盟》</strong>（简称LOL）是由美国<em>Piot Games</em>开发，中国大陆地区由腾讯游戏运营的网络游戏</p>
+        <p><strong>《英雄联盟》</strong>除了即时战略、团队作战外，还拥有一百多位特色各异的英雄、丰富的地图及沅法、自动匹配的战网平台，包括天赋树、召唤师系统、符文等元素。[<ins>1</ins>]</p>
+        <p>2016年1月，根据官方数据显示，L0L全球最高同时在线已突破 <del>750</del> 9900万，全球日活跃高达2700万，全球月活跃已达6700万.注册用户亿计，L0L巳经成为当今世界最具人气和影响力的网洛游戏之一。[<ins>2</ins>]</p>
+        <!-- 图像 -->
+        <img src="https://how2j.cn/example.gif" title="鼠标停留显示标题"/>
+        <img src="https://how2j.cn/example.gif" width="200" height="200" title="设置显示长宽"/>
+        <img src="#" alt="图片不存在的时候，alt 属性的内容就会出现"/><br/>
+        <!-- 超链 -->
+        <a href="http://www.baidu.com" title="当前窗口跳转到http://www.baidu.com">百度</a><br/>
+        <a href="http://www.baidu.com" target="_blank" title="新窗口跳转到http://www.baidu.com">百度</a><br/>
+        <a href="http://www.baidu.com" target="_blank" title="图片超链接">
+            <img src="https://how2j.cn/example.gif" title="鼠标停留显示标题，会覆盖外部超链接设置的 title"/>
+        </a><br/>
+        <!-- 表格 -->
+        <table border="1" width="200px">
+            <tr>
+                <th colspan="2" align="center" bgcolor="pink">colspan</th>
+                <td rowspan="4" valign="bottom">rowspan</td>
+            </tr>
+            <tr>
+                <td width="40%">1</td>
+                <td>2<br/>2<br/></td>
+            </tr>
+            <tr>
+                <td align="center" valign="middle">3</td>
+                <td>4<br/>4<br/></td>
+            </tr>
+            <tr>
+                <td align="right" valign="top">5</td>
+                <td>6<br/>6<br/></td>
+            </tr>
+        </table>
+        <!-- 列表 -->
+        <ul>
+            <li>无序列表</li>
+            <li>无序列表</li>
+        </ul>
+        <ol>
+            <li>有序列表</li>
+            <li>有序列表</li>
+        </ol>
+        <!-- 块 div span -->
+        这没有标签
+        <div> 这是一个div </div>
+        <span>这是一个span</span><br/>
+        <img style="margin-left:50px" src="https://how2j.cn/example.gif"/><br/>
+        <img style="margin-left:50px" src="https://how2j.cn/example.gif"/>
+        <div style="margin-left:100px" >
+            <img src="https://how2j.cn/example.gif"/><br/>
+            <img src="https://how2j.cn/example.gif"/>
+        </div>
+        <p>
+            div是块元素，即自动换行，常见的块元素还有h1,table,p<br/>
+            span是内联元素，即不会换行，常见的内联元素还有img,a,b,strong<br/>
+        </p>
+        <!-- 字体 -->
+        <font color="green">绿色默认大小字体</font><br/>
+        <font color="blue" size="+2">蓝色大2号字体</font><br/>
+        <font color="#ff0000" size="-2">红色小2号字体</font><br/>
+        <!-- 内联框架 -->
+        <iframe src="https://how2j.cn/" width="600px" height="400px"></iframe>
+    </body>
+</html>

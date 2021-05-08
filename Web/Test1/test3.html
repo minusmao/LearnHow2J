@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!-- HTML：表单元素 -->
+<html>
+    <head>
+        <title>HTML：表单元素</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <!-- 文本框 -->
+        <input type="text" size="20" value="有初始值的文本框" ><br/>
+        <input type="text" placeholder="有背景文字的文本框"><br/>
+        <!-- 密码框 -->
+        <input type="password" placeholder="密码框"><br/>
+        <!-- 表单 -->
+        <h4>基本的表单：</h4>
+        <form method="POST" action="https://how2j.cn/study/login.jsp">
+            <input type="text" name="name" placeholder="请输入账号"><br/>
+            <input type="password" name="password" placeholder="请输入密码"><br/>
+            <input type="submit" value="登录">
+            <input type="reset" value="重置"><br/>
+        </form>
+        <!-- 单选框 -->
+        <input type="radio" name="name1" value="r1">选项 1<br/>
+        <input type="radio" name="name1" value="r2" checked>选项 2<br/>
+        <input type="radio" name="name1" value="r3">选项 3<br/>
+        <input type="radio" name="name1" value="r4">选项 4<br/>
+        <!-- 复选框 -->
+        <form method="GET" action="#">
+            <input type="checkbox" name="check1" value="c1" checked="checked"><br/>
+            <input type="checkbox" name="check2" value="c2"><br/>
+            <input type="submit" value="确定">
+        </form>
+        <!-- 下拉列表 -->
+        <form>
+            <select name="select1">
+                <option value="oo1">o1</option>
+                <option>o2</option>
+                <option>o3</option>
+            </select><br/>
+            <select name="select2" size="3" multiple>
+                <option selected>o4</option>
+                <option>o5</option>
+                <option>o6</option>
+                <option>o7</option>
+            </select><br/>
+            <input type="submit" value="确定">
+        </form>
+        <!-- 文本域 -->
+        <textarea cols="30" rows="8">
+            abc
+            def
+            xyz
+        </textarea><br/>
+        <!-- 普通、提交、重置按钮 -->
+        <form method="POST" action="https://how2j.cn/study/login.jsp">
+            <input type="text" name="name" placeholder="请输入账号"><br/>
+            <input type="password" name="password" placeholder="请输入密码"><br/>
+            <input type="button" value="普通按钮">
+            <input type="submit" value="登录">
+            <input type="reset" value="重置"><br/>
+        </form>
+        <!-- 图像提交 -->
+        <form method="POST" action="https://how2j.cn/study/login.jsp">
+            <input type="text" name="name" placeholder="请输入账号"><br/>
+            <input type="password" name="password" placeholder="请输入密码"><br/>
+            <input type="image" src="https://how2j.cn/example.gif">
+            <input type="reset"><br/>
+        </form>
+        <!-- 按钮 -->
+        <p>
+            button 也可以设置type="submit"
+            IE下button的type的默认值为button不具备提交功能
+            其他浏览器type的默认值是submit
+        </p>
+        <button>button按钮</button>
+        <button><img src="https://how2j.cn/example.gif"/></button>
+        <form method="POST" action="https://how2j.cn/study/login.jsp">
+            <input type="text" name="name" placeholder="请输入账号"><br/>
+            <input type="password" name="password" placeholder="请输入密码"><br/>
+            <button>登录</button>
+            <input type="reset"><br/>
+        </form>
+    </body>
+</html>
