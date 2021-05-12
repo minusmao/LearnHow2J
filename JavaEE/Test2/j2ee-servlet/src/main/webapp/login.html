@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+</head>
+<body>
+    <form method="post" action="login-servlet">
+        <b>登陆</b><br>
+        <input type="text" name="name" placeholder="请输入用户名"><br>
+        <input type="password" name="password" placeholder="请输入密码"><br>
+        <input type="submit" value="登陆">
+        <input type="reset" value="清空">
+    </form>
+    <form method="get" action="user-list-servlet">
+        <b>获取数据列表</b><br>
+        <input type="text" name="begin" placeholder="开始" value="0">
+        <input type="text" name="length" placeholder="数据个数" value="10">
+        <input type="submit" value="查询">
+    </form>
+    <form method="get" action="user-delete-servlet">
+        <b>删除数据</b><br>
+        <input type="text" name="id" placeholder="删除的id">
+        <input type="submit" value="删除">
+    </form>
+    <form method="post" action="user-add-servlet">
+        <b>添加数据，若已存在，则更新</b><br>
+        <input type="text" name="name" placeholder="请输入用户名"><br>
+        <input type="password" name="password" placeholder="请输入密码"><br>
+        <input type="radio" name="sex" value="man">男
+        <input type="radio" name="sex" value="woman">女<br>
+        <input type="text" name="country" placeholder="请输入国籍"><br>
+        <input type="text" name="signature" placeholder="请输入签名"><br>
+        <input type="submit" value="提交">
+        <input type="reset" value="清空">
+    </form>
+</body>
+</html>

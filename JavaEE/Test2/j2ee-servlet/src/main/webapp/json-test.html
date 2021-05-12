@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试 JSON 和 Ajax</title>
+  <script>
+    let xmlHttp = new XMLHttpRequest();
+    /* 提交 JSON 数据函数 */
+    function submitJSON() {
+      let name = document.getElementById("name").value;
+      let hp = Number.parseInt(document.getElementById("hp").value);
+      // JSON 对象
+      let heroJSON = {"name":name, "hp":hp};
+      let heroJSONStr = JSON.stringify(heroJSON);    // 转化为字符串形式
+      // 提交 JSON 数据
+      xmlHttp.onreadystatechange=getResult;    // 设置响应函数
+      xmlHttp.open("POST", "json-test-servlet", true);    // 用 POST 方式打开 URL
+      // 如果 Content-type 设为 application/json;charset=UTF-8，Servlet只能通过输入流读取
+      // 如果 Content-type 设为 application/x-www-form-urlencoded，Servlet可以像普通表单一样读取内容
+      xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded;charset=UTF-8");    // 设置 HTTP 报文首部行信息，表明类型和编码
+      xmlHttp.send("hero=" + heroJSONStr);    // 发送参数
+    }
+    /* 处理结果函数 */
+    function getResult() {
+      /*
+        xmlHttp.readyState 4 表示请求已完成(4 可以由 xmlHttp.DONE 表示)
+        xmlHttp.status 200 表示响应成功
+        xmlHttp.responseText; 用于获取服务端传回来的文本
+      */
+      if (xmlHttp.readyState===xmlHttp.DONE && xmlHttp.status===200) {
+        let result = xmlHttp.responseText;    // 获得服务器返回的内容
+        let resultJSON = JSON.parse(result);    // 解析为 JSON 对象
+        let show = document.getElementById("show");    // 获得用于显示的 div
+        show.innerText = "收到的 JSON 内容："+ result + "解析后：" + resultJSON.name + ": " + resultJSON.hp;
+      }
+    }
+  </script>
+</head>
+<body>
+  <input type="text" id="name" placeholder="请输入姓名"><br>
+  <input type="text" id="hp" placeholder="请输入血量"><br>
+  <input type="button" value="提交" onclick="submitJSON()">
+  <input type="reset">
+  <div id="show"></div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <title>测试 Servlet</title>
+</head>
+<body>
+    <h4>GET 方式提交表单</h4>
+    <form method="get" action="hello-servlet">
+        <input type="text" name="name" placeholder="请输入姓名"><br>
+        <input type="password" name="password" placeholder="请输入密码"><br>
+        <input type="submit" value="提交">
+        <input type="reset">
+    </form>
+    <h4>POST 方式提交表单</h4>
+    <form method="post" action="hello-servlet">
+        <b>账户信息：</b><br>
+        <input type="text" name="name" placeholder="请输入姓名"><br>
+        <input type="password" name="password" placeholder="请输入密码"><br>
+        <b>性别：</b><br>
+        <input type="radio" name="age" value="man">男
+        <input type="radio" name="age" value="woman">女<br>
+        <b>爱好：</b><br>
+        <input type="checkbox" name="hobby" value="basketball">篮球
+        <input type="checkbox" name="hobby" value="swimming">游泳
+        <input type="checkbox" name="hobby" value="game">游戏<br>
+        <b>国籍：</b><br>
+        <select name="country">
+            <option value="China">中国</option>
+            <option value="Japan">日本</option>
+            <option value="America">美国</option>
+        </select><br><br>
+        <input type="submit" value="提交">
+        <input type="reset">
+    </form>
+    <a href="login.html">跳转测试和CURD测试：login.html</a><br>
+    <h4>request和response常用方法测试：</h4>
+    <form method="post" action="register-servlet">
+        <b>账户信息：</b><br>
+        <input type="text" name="name" placeholder="请输入姓名"><br>
+        <input type="password" name="password" placeholder="请输入密码"><br>
+        <b>性别：</b><br>
+        <input type="radio" name="age" value="man">男
+        <input type="radio" name="age" value="woman">女<br>
+        <b>爱好：</b><br>
+        <input type="checkbox" name="hobby" value="basketball">篮球
+        <input type="checkbox" name="hobby" value="swimming">游泳
+        <input type="checkbox" name="hobby" value="game">游戏<br>
+        <b>国籍：</b><br>
+        <select name="country">
+            <option value="China">中国</option>
+            <option value="Japan">日本</option>
+            <option value="America">美国</option>
+        </select><br><br>
+        <input type="submit" value="提交">
+        <input type="reset">
+    </form>
+    <h4>上传文件测试：</h4>
+    <form method="post" action="upload-servlet" enctype="multipart/form-data">
+<!--        名称：<input type="text" name="name"><br>-->
+        文件：<input type="file" name="upload-file"><br>
+        <input type="submit">
+        <input type="reset">
+    </form>
+    <a href="json-test.html">JSON和Ajax测试</a>
+</body>
+</html>
