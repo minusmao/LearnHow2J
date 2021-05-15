@@ -42,12 +42,14 @@ public class HelloServlet extends HttpServlet {
     // 处理 POST 请求报文
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // 获取请求报文提交的参数
+        request.setCharacterEncoding("UTF-8");    // 设置按 UTF-8 解码（默认按 ISO-8859-1）
         String name = request.getParameter("name");
 
-        System.out.println("测试编码是否正确：" + name);    // 出现乱码，浏览器发过来是 UTF-8 编码的“字节数组”，该方法却按 ISO-8859-1 编码
-        byte[] bytes = name.getBytes("ISO-8859-1");    // 按 ISO-8859-1 解码得到字节数组
-        String nameUTF = new String(bytes, "UTF-8");    // 将字节数组重新按 UTF-8 编码
-        System.out.println("测试编码是否正确：" + nameUTF);
+        System.out.println("测试编码是否正确：" + name);    // 若没设置解码方式，会出现乱码，浏览器发过来是 UTF-8 编码的“字节数组”，默认按 ISO-8859-1 编码
+        // 也可以通过如下方式解码
+//        byte[] bytes = name.getBytes("ISO-8859-1");    // 按 ISO-8859-1 解码得到字节数组
+//        String nameUTF = new String(bytes, "UTF-8");    // 将字节数组重新按 UTF-8 编码
+//        System.out.println("测试编码是否正确：" + nameUTF);
 
         String password = request.getParameter("password");
         String age = request.getParameter("age");
@@ -69,7 +71,8 @@ public class HelloServlet extends HttpServlet {
                 "爱好：%s<br>" +
                 "国籍：%s<br>" +
                 "</body></html>";
-        String message = String.format(html, nameUTF, password, age, hobby, country);
+//        String message = String.format(html, nameUTF, password, age, hobby, country);
+        String message = String.format(html, name, password, age, hobby, country);
 
         // 获取输出流，输出信息
         PrintWriter out = response.getWriter();
