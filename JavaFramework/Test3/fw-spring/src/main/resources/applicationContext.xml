@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!-- 测试 IOC -->
+<!--
+    <bean name="category" class="com.example.pojo.Category">
+        <property name="id" value="1"/>
+        <property name="name" value="category1"/>
+    </bean>
+    <bean name="product" class="com.example.pojo.Product">
+        <property name="id" value="1"/>
+        <property name="name" value="product1"/>
+        <property name="price" value="10.0"/>
+        <property name="category" ref="category"/>
+    </bean>
+-->
+    <!-- 使用注解方式 -->
+    <context:component-scan base-package="com.example.pojo"/>
+
+    <!-- 测试 AOP -->
+<!--
+    <bean name="productService" class="com.example.service.ProductService"></bean>
+    <bean name="loggerAspect" class="com.example.aspect.LoggerAspect"></bean>
+    <bean name="timerAspect" class="com.example.aspect.TimerAspect"></bean>
+    <aop:config>
+        注释: 切入点（pointcut）
+        <aop:pointcut id="loggerCutPoint" expression="execution(* com.example.service.ProductService.*(..))"/>
+        注释: 切面（aspect）
+        <aop:aspect id="logAspect" ref="loggerAspect">
+            <aop:around pointcut-ref="loggerCutPoint" method="log"/>
+        </aop:aspect>
+        注释: 切面（aspect）
+        <aop:aspect id="timAspect" ref="timerAspect">
+            <aop:around method="time" pointcut-ref="loggerCutPoint"/>
+        </aop:aspect>
+    </aop:config>
+-->
+    <!-- 使用注解方式 -->
+    <context:component-scan base-package="com.example.aspect"/>
+    <context:component-scan base-package="com.example.service"/>
+    <aop:aspectj-autoproxy/>
+</beans>
