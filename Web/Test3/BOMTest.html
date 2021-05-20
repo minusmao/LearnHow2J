@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BOM</title>
+        <!-- 
+            浏览器对象包括
+                Window(窗口)
+                Navigator(浏览器)
+                Screen (客户端屏幕)
+                History(访问历史)
+                Location(浏览器地址)
+         -->
+        <script>
+            /* Window(窗口) */
+            // 获取文档显示区域的高度和宽度
+            console.log("内部 - 高：" + window.innerHeight + "，宽：" + window.innerWidth);
+            // 获取外部窗体的宽度和高度
+            console.log("外部 - 高：" + window.outerHeight + "，宽：" + window.outerWidth);
+            // 打开一个新的窗口
+            function openNewWindow() {
+                window.open
+                window.open("https://how2j.cn/k/javascript/javascript-bom-window/449.html");
+            }
+        </script>
+        <script>
+            /* Navigator(浏览器) */
+            // 打印浏览器相关信息
+            document.write("<p>浏览器产品名称：");
+            document.write(navigator.appName + "</p>");
+ 
+            document.write("<p>浏览器版本号：");
+            document.write(navigator.appVersion + "</p>");
+ 
+            document.write("<p>浏览器内部代码：");
+            document.write(navigator.appCodeName + "</p>");
+            
+            document.write("<p>操作系统：");
+            document.write(navigator.platform + "</p>");
+            
+            document.write("<p>是否启用Cookies：");
+            document.write(navigator.cookieEnabled + "</p>");
+            
+            document.write("<p>浏览器的用户代理报头：");
+            document.write(navigator.userAgent + "</p>");
+        </script>
+        <script>
+            /* Screen (客户端屏幕) */
+            document.write("用户的屏幕分辨率: ")
+            document.write(screen.width + "*" + screen.height)
+            document.write("<br>")
+            document.write("可用区域大小: ")
+            document.write(screen.availWidth + "*" + screen.availHeight)
+            document.write("<br>")
+        </script>
+        <script>
+            /* History(访问历史) */
+            function goBack() {
+                history.back();
+                // history.go(-2); //-1表示上次，-2表示上上次，以次类推
+            }
+        </script>
+        <script>
+            /* Location(浏览器地址) */
+            // 刷新当前页面
+            document.write((new Date())+ "<br>");
+            function refresh() {
+                location.reload();
+            }
+            // 跳转到另一个页面
+            function jump() {
+                // 法 1
+                // location = "./BaseTest.html";
+                // 法 2
+                location.assign("./BaseTest.html");
+            }
+            // Location的其他属性
+            console.log("协议 location.protocol: "+location.protocol);
+            console.log("主机名 location.hostname: "+location.hostname);
+            console.log("端口号 (默认是80，没有即表示80端口)location.port: "+location.port);
+            
+            console.log("主机加端口号 location.host: "+location.host);
+            console.log("访问的路径  location.pathname: "+location.pathname);
+            
+            console.log("锚点 location.hash: "+location.hash);
+            console.log("参数列表 location.search: "+location.search);
+        </script>
+        <script>
+            /* 弹出框 */
+            // 警告框
+            function register() {
+                alert("注册成功");
+            }
+            // 确认框
+            function del() {
+                let d = confirm("是否要删除");    // 返回 true 或 false
+                console.log(d);
+            }
+            // 输入框
+            function p() {
+                let name = prompt("请输入姓名");    // 返回输入的结果
+                console.log(name);
+            }
+        </script>
+        <script>
+            /* 计时器 */
+            // 只执行一次
+            function printTime1() {
+                let now = new Date();
+                let timeStr = now.getHours() + ":" + now.getMinutes() + ":" +now.getSeconds();
+                document.getElementById("time1").innerHTML = timeStr;
+            }
+            function showTimeIn3Seconds() {
+                setTimeout(printTime1, 3000);    // printTime 函数，3000ms 时间
+            }
+            // 重复执行
+            function printTime2() {
+                let now = new Date();
+                let timeStr = now.getHours() + ":" + now.getMinutes() + ":" +now.getSeconds();
+                document.getElementById("time2").innerHTML = timeStr;
+            }
+            let t;
+            function showTimeRepeat() {
+                t = setInterval(printTime2, 1000);    // printTime 函数，3000ms 时间
+            }
+            // 终止重复执行
+            function stopShow() {
+                clearInterval(t);    // 停止重复
+            }
+        </script>
+    </head>
+    <body>
+        <button onclick="openNewWindow()">打开一个新的窗口</button><br>
+        <button onclick="goBack()">返回上一次访问</button><br>
+        <button onclick="refresh()">刷新</button><br>
+        <button onclick="jump()">跳转</button><br>
+        <button onclick="register()">警告框</button><br>
+        <button onclick="del()">确认框</button><br>
+        <button onclick="p()">输入框</button><br>
+        <h4>计时器</h4>
+        <div id="time1"></div>
+        <button onclick="showTimeIn3Seconds()">点击后3秒钟后显示当前时间，并且只显示一次</button>
+        <div id="time2"></div>
+        <button onclick="showTimeRepeat()">重复显示，间隔 1s</button>
+        <button onclick="stopShow()">停止重复</button>
+    </body>
+</html>

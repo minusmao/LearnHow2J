@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JavaScript 对象</title>
+        <script>
+            /* 数字 */
+            // 此对象 Number 与基本数据类型 number 不同，拥有更多属性和方法
+            let numObj = new Number(123);
+            document.write(numObj + ": " + typeof numObj + "<br>");
+            let numInt = 123;
+            document.write(numInt + ": " + typeof numInt + "<br>");
+            // 最大值和最小值
+            document.write("Number对象的最大值：" + Number.MAX_VALUE + "<br>");
+            document.write("Number对象的最小值：" + Number.MIN_VALUE + "<br>");
+            document.write("Number对象的最大安全整数：" + Number.MAX_SAFE_INTEGER + "<br>");
+            document.write("Number对象的最小安全整数：" + Number.MIN_SAFE_INTEGER + "<br>");
+            // NaN：Not a Number
+            let notNum = new Number("123abc");
+            document.write(notNum + "<br>");         // 打印结果为 NaN
+            document.write((notNum == Number.NaN) + "<br>");    // 依然不相等
+            document.write(isNaN(notNum) + "<br>");           // 通过函数 isNaN() 判断
+            // 返回数字小数表达
+            document.write(numInt.toFixed(2) + "<br>");    // 两位小数
+            document.write(1.236.toFixed(2) + "<br>");    // 会自动四舍五入
+            // 返回科学计数法
+            document.write(numObj.toExponential() + "<br>");
+            document.write(1234567.0.toExponential(), "<br>");    // 写数字时，必须是小数
+            // 返回一个数字对象的基本数字类型
+            document.write(typeof numObj + "<br>");    // 显示结果object
+            document.write(typeof numObj.valueOf() + "<br>");    // 显示结果number
+            // 练习-乘法
+            function mul() {
+                let mul_num1 = Number.parseFloat(document.getElementById("mul_num1").value);
+                let mul_num2 = Number.parseFloat(document.getElementById("mul_num2").value);
+                let mul_result = (mul_num1 * mul_num2).toExponential();
+                console.log(mul_num1);
+                console.log(mul_num2);
+                console.log(mul_num1 * mul_num2);
+                console.log(mul_result);
+                document.getElementById("mul_result").value = mul_result;
+            }
+        </script>
+        <script>
+            /* 字符串 */
+            // 此对象 String 与基本数据类型 string 不同，拥有更多属性和方法
+            let strObj = new String("hello");
+            console.log(strObj + ": " + typeof strObj + "<br>");
+            let str = "hello";
+            console.log(str + ": " + typeof str + "<br>");
+            // 返回字符串长度
+            console.log(strObj.length);
+            console.log(str.length);
+            // 返回指定位置的字符
+            console.log(strObj.charAt(3));
+            console.log(str.charCodeAt(3));    // 返回该位置字符的 Unicode 码
+            // 字符串拼接
+            console.log(strObj.concat(strObj));    // 临时的拼接
+            console.log(strObj.toString());    // 没变
+            // 子字符串出现的位置
+            console.log(strObj.indexOf("el"));    // 第一次出现
+            console.log(strObj.lastIndexOf("el"));    // 最后一次出现
+            // 比较字符串
+            console.log("abc".localeCompare("xyz"));    // -1
+            console.log("xyz".localeCompare("abc"));    // 1
+            console.log("abc".localeCompare("abc"));    // 0
+            // 截取一段子字符串
+            console.log("hello world".substring(1, 4));    // 左闭右开
+            // 根据分隔符，把字符串转换为数组
+            console.log("str1,str2,str3,str4".split(","));
+            console.log("str1,str2,str3,str4".split(",", 2));    // 只保留前两个
+            // 替换子字符串
+            console.log("str1,str2,str3,str4".replace("str", "abc"));    // 只替换找到的第一个
+            var regS = new RegExp("str","g");
+            console.log("str1,str2,str3,str4".replace(regS, "abc"));    // 替换所有 str
+            console.log("str1,str2,str3,str4".replace(/str/g, "abc"));     // 替换所有 str
+            // 注意：返回字符串类型的方法，返回的都是基本类型的String
+            console.log(typeof "hello world".substring(1, 4));
+            /* 练习 */
+            function change() {
+                let beforeAreaStr = document.getElementById("beforeArea").value;
+                let beforeTextStr = document.getElementById("beforeText").value;
+                let afterTextStr = document.getElementById("afterText").value;
+                // 替换
+                var re = new RegExp(beforeTextStr,"g");
+                let afterAreaStr = beforeAreaStr.replace(re, afterTextStr);
+                document.getElementById("afterArea").value = afterAreaStr;
+            }
+        </script>
+        <script>
+            /* 数组 */
+            // 创建数组对象
+            console.log(new Array());    // 空数组
+            console.log(new Array(5));    // 创建长度是5的数组，但是其每一个元素都是undefine
+            console.log(new Array(1, 2, 3, 4));    // 根据参数创建数组
+            // 数组的长度
+            console.log(new Array(5).length);
+            // 遍历数组
+            let arr1 = new Array(1, 2, 3);
+            console.log("普通 for");
+            for (let index = 0; index < arr1.length; index++) {
+                console.log(arr1[index]);
+            }
+            console.log("foreach");
+            arr1.forEach(element => {
+                console.log(element);
+            });
+            console.log("for in");
+            for (const i in arr1) {
+                console.log(arr1[i]);
+            }
+            // 连接数组
+            let arr2 = arr1.concat(new Array(5, 6, 7));
+            console.log(arr2);
+            // 通过指定分隔符，返回一个数组的字符串表达
+            let str1 = arr1.join("+");
+            console.log(str1);
+            // 分别在最后的位置插入数据和获取数据(获取后删除) ----- 栈
+            console.log(arr1.push(100, 200));    // 入栈，返回新的长度
+            console.log(arr1.pop());    // 出栈，返回出来的数
+            console.log(arr1.pop());    // 出栈，返回出来的数
+            // 分别在最开始的位置插入数据和获取数据(获取后删除)
+            console.log(arr1.unshift(300));    // 前面插入，返回新的长度
+            console.log(arr1.shift());    // 前面取出，返回出来的数
+            // 对数组的内容进行排序
+            let arr3 = new Array(3, 1, 4, 1, 5, 9, 2, 6);
+            arr3.sort();
+            console.log(arr3);
+            // 自定义排序算法
+            function comparator(v1,v2) {
+                return v2-v1;
+            }
+            arr3.sort(comparator);    // 存入比较函数
+            console.log(arr3);
+            // 练习：排序去重
+            arr3 = new Array(3, 1, 4, 1, 5, 6, 2, 6);
+            arr3.sort();    // 排序
+            let left = 0
+            for (let right = 1; right < arr3.length; right++) {
+                // 去重
+                if(arr3[left] < arr3[right]) {
+                    left++;
+                    arr3[left] = arr3[right];
+                }
+            }
+            console.log(arr3.slice(0, left+1));    // 0 到 left+1 为结果
+            // 对数组的内容进行反转
+            let arr4 = new Array(1, 2, 3, 4, 5, 6, 7);
+            arr4.reverse();
+            console.log("反转：" + arr4);
+            // 获取子数组
+            arr4.reverse();
+            console.log(arr4.slice(1, 3));    // 左闭右开
+            // 删除和插入元素
+            arr4.splice(3, 2);    // 从位置3开始 ，删除2个元素
+            console.log("删除：" + arr4);
+            arr4.splice(3, 0, 8, 9);    // 从位置3开始，删除0个元素，但是插入8和9
+            console.log(arr4);
+            // 练习：字符排序
+            function sortStr() {
+                // 获得输入的内容
+                let beforeStr = document.getElementById("beforeStr").value;
+                // 按空格分成字符串数组，并排序
+                let strArr = beforeStr.split(" ");
+                // 输出正序
+                document.getElementById("pros").value = strArr.sort();
+                // 输出倒序，直接把正序反转
+                document.getElementById("cons").value = strArr.reverse();
+            }
+            function sortCapital() {
+                // 获得输入的内容
+                let beforeStr = document.getElementById("beforeStr").value;
+                // 转化为字符数组
+                let capitalArr = beforeStr.split("");
+                // 输出正序
+                document.getElementById("pros").value = capitalArr.sort();
+                // 输出倒序，直接把正序反转
+                document.getElementById("cons").value = capitalArr.reverse();
+            }
+        </script>
+        <script>
+            /* 日期 */
+            // 创建日期对象
+            let now = new Date();
+            console.log(now);
+            // 年月日 周
+            console.log(now.getFullYear() + "年" + (now.getMonth()+1) + "月" + now.getDate() + "日 周" + now.getDay());
+            // 时分秒 毫秒
+            console.log(now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + " " + now.getMilliseconds());
+            // 经历的毫秒数（从1970/1/1 08:00:00 至今）
+            console.log(now.getTime());
+            // 修改日期和时间
+            now.setFullYear(2012);
+            now.setMonth(11);
+            now.setDate(12);
+            now.setHours(0);
+            now.setMinutes(0);
+            now.setSeconds(0);
+            console.log("修改后：" + now);
+        </script>
+        <script>
+            /* Math 对象 */
+            // 自然对数和圆周率
+            console.log(Math.E);
+            console.log(Math.PI);
+            // 绝对值
+            console.log(Math.abs(-1));
+            // 最小最大
+            console.log(Math.max(1, 50, 100));    // 返回最大数
+            console.log(Math.min(1, 50, 100));    // 返回最小数
+            // 求幂
+            console.log(Math.pow(2, 3));    // 2 的 3 次方
+            // 四舍五入
+            console.log(Math.round(3.5));
+            // 随机数（0 到 1 之间）
+            console.log(Math.random());
+            console.log((Math.random()*13) + 7);    // 7 至 20 之间
+        </script>
+        <script>
+            /* 自定义对象 */
+            // 通过 new Object 创建对象
+            let hero = new Object();
+            hero.name = "galen";
+            hero.kill = function () {
+                console.log(hero.name + " 正在杀敌" );
+            }
+            hero.kill();    // 调用对象方法
+            // 通过 function 设计一个对象
+            function Hero(name) {
+                this.name = name;
+                this.kill = function () {
+                    console.log(this.name + " 正在杀敌" );
+                }
+            }
+            let h1 = new Hero("h1name");
+            h1.kill();
+            // 追加新方法
+            Hero.prototype.die = function () {
+                console.log(this.name + " 阵亡" );
+            }
+            h1.die();
+        </script>
+    </head>
+    <body>
+        <input type="text" id="mul_num1" value="0"> * 
+        <input type="text" id="mul_num2" value="0"> = 
+        <input type="text" id="mul_result" value="0" disabled="disabled">
+        <input type="button" value="计算" onclick="mul()">
+        <h4>字符串练习</h4>
+        <textarea id="beforeArea" cols="50" rows="6"></textarea><br>
+        <input type="text" id="beforeText"><br>
+        <input type="text" id="afterText"><br>
+        <textarea id="afterArea" cols="50" rows="6"></textarea><br>
+        <button type="button" onclick="change()">替换</button>
+        <h4>字符串排序练习</h4>
+        <textarea id="beforeStr" cols="50" rows="6"></textarea><br>
+        <textarea id="pros" cols="50" rows="6"></textarea><br>
+        <textarea id="cons" cols="50" rows="6"></textarea><br>
+        <button type="button" onclick="sortCapital()">字母排序</button>
+        <button type="button" onclick="sortStr()">单词排序</button>
+    </body>
+</html>

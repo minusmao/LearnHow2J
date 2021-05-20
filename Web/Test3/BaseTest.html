@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JavaScript 语言基础</title>
+        <!-- script 标签可以放在 html 的任何地方，一般建议放在 head 标签里 -->
+        <!-- 使用外部js文件：<script src="https://how2j.cn/study/hello.js"></script> -->
+        <script>
+            /* Hello JavaScript */
+            // 通过javascript向文档中输出文本
+            document.write("Hello JavaScript<br>");
+            /* 声明变量 */
+            var varX = 10;    // 函数作用域，不太合理，需要闭包
+            let letX = 10;    // 块作用域，比较合理
+            const CONST_X = 10;    // 常量
+            document.write("变量：" + varX + letX + CONST_X + "<br>");
+            /* 调试 */
+            console.log("输出到浏览器的 console 窗口里，不影响用户使用");
+            /* 基本数据类型 */
+            /*
+                undefined    声明了但未赋值
+                null         空对象或对象不存在
+                boolean      布尔
+                number       数字
+                string       字符串
+                var          动态类型
+            */
+            var typeX = 10;
+            console.log(typeof(typeX));
+            typeX = "hello";
+            console.log(typeof typeX);
+            console.log(typeX.length)
+            /* 类型转换（javascript是一门很有意思的语言，即便是基本类型，也是伪对象，所以他们都有属性和方法） */
+            let typeNum = 10;
+            let typeBool = true;
+            let typeStr = "hello";
+            // 转换为字符串：无论是Number,Boolean还是String都有一个toString方法，但是null.toString会报错，String(null)不会报错
+            console.log(typeNum.toString());      // 默认模式
+            console.log(typeNum.toString(16));    // 基模式，基为16进制
+            console.log(String(typeNum));
+            console.log(String(null));
+            // 转换为数字：Number()当转换的内容包含非数字的时候，返回NaN，而parseInt()会返回开头的合法数字部分
+            typeNum = parseInt("20");    // 整数
+            console.log((typeof typeNum) + ": " + typeNum);
+            typeNum = parseFloat("3.14");    // 浮点数
+            console.log((typeof typeNum) + ": " + typeNum);
+            // 转换为Boolean
+            console.log("字符串非空即为true：" + Boolean(""));
+            console.log("数字非0即为true：" + Boolean(0));
+            console.log("对象非null即为true：" + Boolean(new Object()));
+        </script>
+        <script>
+            /* 函数 */
+            // 定义函数
+            function println(message) {
+                document.write(message + "<br>");
+                
+            }
+            // 调用函数
+            println("自动换行");
+            println("自动换行");
+            /* 阶段性练习1：计算器 */
+            function add(num1, num2) {
+                return Number(num1) + Number(num2);
+            }
+            function get() {
+                // 获得两个输入的值，取出来为字符串类型
+                let num1 = document.getElementById("num1").value;
+                let num2 = document.getElementById("num2").value;
+                // 输出
+                document.getElementById("result").value = add(num1, num2);
+            }
+            /* 事件 */
+            function alertHello() {
+                alert("Hello");
+            }
+            /* 运算符：基本其他语言一样，特殊的是绝对等于“===”和绝对不等于“===” */
+            console.log("普通等于判断，不判断类型：" + (1 == '1'));    // 打印 true
+            console.log("绝对等于判断，判断类型：" + (1 === '1'));     // 打印 false
+            /* 条件语句、循环语句与其他语言一样，特殊的是增强性for循环（与Java不一样），形式如下：for(i in X)，i是下标 */
+            let arr = new Array(1, 2, 3);
+            // for in
+            for (const i in arr) {
+                console.log(arr[i]);
+            }
+            /* 错误处理 */
+            try {
+                f2();    // 未定义的函数，如果不捕捉错误，后面的代码将被终止执行
+            } catch (error) {
+                console.log(error.message);
+            }
+        </script>
+        <script>
+            /* 阶段性练习3：复利计算 ------ JS代码 */
+            // 设置指定 id 的 value
+            function setValue(id, value) {
+                document.getElementById(id).value = value;
+            }
+            // 获得指定 id 的 value 的浮点数形式
+            function getNumberValue(id) {
+                return parseFloat(document.getElementById(id).value);
+            }
+            /*取幂函数*/
+            function p(base, power){
+                if(1==power)
+                return base
+                if(0==power)
+                return 1;
+                var result = base;
+                for(var i = 0; i<power-1; i++){
+                    result = result*base;
+                }
+                return result;
+            }
+            
+            /*取复利*/
+            function fuli(rate, year){
+                var result = 0;
+                for(var i=year;i>0;i--){
+                result+=p(rate,i);
+                }
+                return result;
+            }
+            
+            /* 计算 */
+            function calc(){
+                var initMoney= getNumberValue("initMoney");
+                var rate= getNumberValue("rate") +0.0;
+                var year= getNumberValue("year");
+                var each= getNumberValue("each");
+                var sum1 = (year-1)*each+initMoney;
+                var sum3=each* fuli(  (1+rate/100),(year-1)) + initMoney*p( (1+rate/100) ,year);
+                
+                var sum2 = sum3-sum1;
+                setValue("sum1",sum1);
+                setValue("sum2",sum2);
+                setValue("sum3",sum3);
+            }
+        </script>
+        <style>
+            /* 阶段性练习3：复利计算 ------ 样式 */
+            table{
+                border-collapse: collapse;
+            }
+            td{
+                border: 1px silver solid;
+                padding: 5px;
+                font-size: 12px;
+            }
+            table input{
+                width: 80px;
+            }
+        </style>
+    </head>
+    <body>
+        <h4>javascript 和 DOM 结合的一个简单例子</h4>
+        <p id="text">这个是一段可以被 javascript 隐藏的文本</p>
+        <button onclick="document.getElementById('text').style.visibility='hidden'">隐藏文本</button>
+        <button onclick="document.getElementById('text').style.visibility='visible'">显示文本</button>
+        <h4>阶段性练习1：计算器</h4>
+        <input type="text" id="num1" placeholder="num1">+
+        <input type="text" id="num2" placeholder="num2">=
+        <input type="text" id="result" placeholder="result">
+        <input type="button" onclick="get()" value="运算"><br>
+        <h4>事件</h4>
+        <button type="button" onclick="alertHello()">点击事件</button>
+        <h4>阶段性练习3：复利计算</h4>
+        <table>
+            <tr>
+                <td>起始资金</td>
+                <td><input id="initMoney" type="text" value="0">￥</td>
+            </tr>
+            <tr>
+                <td>每年收益</td>
+                <td><input id="rate" type="text" value="0">%</td>
+            </tr>
+            <tr>
+                <td>复利年数</td>
+                <td><input id="year" type="text" value="1">年</td>
+            </tr>
+            <tr>
+                <td>每年追加资金</td>
+                <td><input id="each" type="text" value="0">￥</td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="button" value="计算" onclick="calc()"></td>
+            </tr>
+            <tr>
+                <td>本金和</td>
+                <td><input type="text" id="sum1" disabled="disabled"  value='0'> ￥</td>
+              </tr>
+              <tr>
+                <td>利息和</td>
+                <td><input type="text" id="sum2"  disabled="disabled" value='0'> ￥</td>
+              </tr>
+              <tr>
+                <td>本息和</td>
+                <td><input type="text" id="sum3"  disabled="disabled" value='0'> ￥</td>
+              </tr>
+        </table>
+    </body>
+</html>
