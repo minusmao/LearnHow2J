@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ajax</title>
+        <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+    </head>
+    <body>
+        <input type="text" id="name" name="name" onkeyup="check()" placeholder="请输入账号">
+        <span id="checkResult"></span>
+        <script>
+            /* 使用AJAX 通过无刷新验证账号是否存在 */
+            let xmlHttp;
+            // 提交数据函数
+            function check() {
+                let name = document.getElementById("name").value;
+                var url = "https://how2j.cn/study/checkName.jsp?name="+name;
+                // 1、创建 XMLHttpRequest 对象
+                xmlHttp = new XMLHttpRequest();
+                // 2、设置响应函数
+                xmlHttp.onreadystatechange=checkResult;
+                // 3、用 GET 方式打开 URL
+                xmlHttp.open("GET", url, true);
+                // 4、发送参数（只有在用 "POST"，并且需要发送参数的时候，才会使用到send）
+                xmlHttp.send(null);
+                // POST 提交 JSON 参考：https://www.bilibili.com/read/cv454960?from=articleDetail
+            }
+            // 处理结果函数
+            function checkResult() {
+                /*
+                    xmlHttp.readyState 4 表示请求已完成(4 可以由 xmlHttp.DONE 表示)
+                    xmlHttp.status 200 表示响应成功
+                    xmlHttp.responseText; 用于获取服务端传回来的文本
+                */
+                if (xmlHttp.readyState===xmlHttp.DONE && xmlHttp.status===200) {
+                    let result = xmlHttp.responseText;                    // 获得服务器返回的内容
+                    let show = document.getElementById("checkResult");    // 获得用于显示的 div
+                    show.innerHTML = result;
+                }
+            }
+        </script>
+    </body>
+</html>
