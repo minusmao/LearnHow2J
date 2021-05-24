@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JSON</title>
+        <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+        <script>
+            // JSON 对象
+            let galen = {"name":"galen","hp":600};
+            document.write(galen.name + "<br>");
+            document.write(galen.hp + "<br>");
+            // JSON 数组
+            let heros = [
+                {"name":"hero1","hp":600},
+                {"name":"hero2","hp":300},
+                {"name":"hero3","hp":200}
+            ];
+            for (const i in heros) {
+                document.write(heros[i].name + ", " + heros[i].hp + "<br>");
+            }
+            // 字符串转 JSON 对象
+            let JSONStr = '{"name":"galen","hp":520}';
+            let JSONObj = eval('(' + JSONStr + ')');    // 注意：使用该函数时，JSON 字符串外部必须有括号
+            document.write(JSONObj.name + ", " + JSONObj.hp + "<br>");
+            // JSON 对象转换为字符串
+            document.write(JSONObj + "<br>");    // 直接打印时，显示 [object Object]
+            let str = JSON.stringify(JSONObj);    // 转化为字符串
+            document.write(str);
+        </script>
+    </head>
+    <body></body>
+</html>
