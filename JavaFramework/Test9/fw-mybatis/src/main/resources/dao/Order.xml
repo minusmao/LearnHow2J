@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pojo">
+    <resultMap id="orderBean" type="Order">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+    <select id="listOrder" parameterType="map" resultMap="orderBean">
+        SELECT * FROM order_ LIMIT #{begin}, #{length}
+    </select>
+    <!-- 联结查询（多对多） -->
+    <resultMap id="orderBeanWithItem" type="Order">
+        <id column="oid" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="create_time" property="createTime"/>
+        <collection property="orderItemList" ofType="OrderItem">
+            <id column="oiid" property="id"/>
+            <result column="number" property="number"/>
+            <association property="product" javaType="Product">
+                <id column="pid" property="id"/>
+                <result column="pname" property="name"/>
+                <result column="price" property="price"/>
+            </association>
+        </collection>
+    </resultMap>
+    <select id="listOrderWithItem" resultMap="orderBeanWithItem">
+        SELECT o.id oid, o.user_id, o.create_time, oi.id oiid, oi.number, p.id pid, p.name pname, p.price
+        FROM order_ o
+            INNER JOIN order_item oi on o.id = oi.order_id
+            LEFT JOIN product p on p.id = oi.product_id;
+    </select>
+</mapper>

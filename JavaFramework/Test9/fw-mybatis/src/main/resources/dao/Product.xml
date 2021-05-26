@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pojo">
+    <!-- 动态 SQL -->
+    <select id="listProduct" resultType="Product">
+        SELECT * FROM product
+        <where>
+            <if test="name!=null">
+                <bind name="likeName" value="'%' + name + '%'"/>
+                AND name LIKE #{likeName}
+            </if>
+            <if test="price!=null and price!=0">
+                AND price > #{price}
+            </if>
+        </where>
+    </select>
+    <select id="listProductIn" resultType="Product">
+        SELECT * FROM product
+        WHERE id IN
+            <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+    </select>
+    <!-- 模糊查询和条件查询 -->
+    <select id="listProductByName" parameterType="map" resultType="Product">
+        SELECT * FROM product WHERE id > #{id} AND name LIKE CONCAT('%', #{name}, '%')
+    </select>
+    <!-- 联结查询（多对一） -->
+    <!-- 定义 resultMap 用于映射：查询结果的列（column）与对象的属性（property）之间的关系 -->
+    <resultMap id="productBean" type="Product">
+        <id column="pid" property="id"/>
+        <result column="pname" property="name"/>
+        <result column="price" property="price"/>
+        <!-- 多对一的关系 -->
+        <!-- property: 指的是外部对象的属性名称, javaType：指的是属性的类型 -->
+        <association property="category" javaType="Category">
+            <id column="cid" property="id"/>
+            <result column="cname" property="name"/>
+        </association>
+    </resultMap>
+    <!-- 查询语句 -->
+    <select id="listProductWithCategory" resultMap="productBean">
+        SELECT p.id 'pid', p.name 'pname', p.price, c.id 'cid', c.name 'cname'
+        FROM product p
+            INNER JOIN category c ON p.category_id = c.id
+    </select>
+</mapper>

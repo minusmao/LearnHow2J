@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pojo">
+    <insert id="addCategory" parameterType="Category">
+        INSERT INTO category (name) VALUES (#{name})
+    </insert>
+    
+    <delete id="deleteCategory" parameterType="Category">
+        DELETE FROM category WHERE id=#{id}
+    </delete>
+    
+    <update id="updateCategory" parameterType="Category">
+        UPDATE category SET name=#{name} WHERE id=#{id}
+    </update>
+
+    <select id="getCategory" parameterType="_int" resultType="Category">
+        SELECT * FROM category WHERE id=#{id}
+    </select>
+    
+    <select id="listCategory" resultType="Category">
+        SELECT * FROM category
+    </select>
+    
+    <!-- 联结查询（一对多） -->
+    <!-- 定义 resultMap 用于映射：查询结果的列（column）与对象的属性（property）之间的关系 -->
+    <resultMap id="categoryBean" type="Category">
+        <id column="cid" property="id"/>
+        <result column="cname" property="name"/>
+        <!-- 一对多的关系 -->
+        <!-- property: 指的是外部对象的属性名称, ofType：指的是集合中元素的类型 -->
+        <collection property="productList" ofType="Product">
+            <id column="pid" property="id"/>
+            <result column="pname" property="name"/>
+            <result column="price" property="price"/>
+        </collection>
+    </resultMap>
+    <!-- 查询语句 -->
+    <select id="listCategoryWithProduct" resultMap="categoryBean">
+        SELECT c.id 'cid', c.name 'cname', p.id 'pid', p.name 'pname', p.price FROM category c LEFT JOIN product p ON c.id=p.category_id
+    </select>
+</mapper>
