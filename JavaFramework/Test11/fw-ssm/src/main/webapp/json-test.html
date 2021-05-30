@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>测试 JSON 数据</title>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <script type="text/javascript" src="jquery.min.js"></script>
+</head>
+<body>
+<h4>测试 JSON 提交</h4>
+<form method="post" action="json/submitCategory">
+  <input type="text" id="id" placeholder="请输入ID"><br>
+  <input type="text" id="name" placeholder="请输入名称"><br>
+  <input type="button" id="sender" value="提交"><br>
+</form>
+<div id="messageDiv"></div>
+<script>
+  $('#sender').click(function () {
+    // 获取输入的两个值
+    let id = parseInt(document.getElementById("id").value);
+    let name = document.getElementById("name").value;
+    // 封装成 JSON 对象
+    let category = {
+      "id":id,
+      "name":name
+    };
+    // 将 JSON 对象转化为 JSON 字符串
+    let categoryStr = JSON.stringify(category);
+    console.log(category);
+    console.log(categoryStr);
+
+    // 提交 Ajax 请求
+    $.ajax({
+      type:"post",
+      url:"json/submitCategory",
+      data:categoryStr,
+      dataType:"json",
+      contentType:"application/json;charset=UTF-8",
+      success:function (data) {
+        console.log(data);
+
+        // 解析服务器响应
+        let json=JSON.parse(data);
+        let name =json.category.name;
+        let id = json.category.id;
+        $("#messageDiv").html("分类id："+ id + "<br>分类名称:" +name );
+      }
+    });
+  });
+</script>
+<button type="button" id="get">获取多个 JSON 数据</button>
+<div id="messageDivs"></div>
+<script>
+  $('#get').click(function(){
+    let url="json/getManyCategory";
+    $.ajax({
+      type:"post",
+      url:"json/getManyCategory",
+      // data:"",
+      dataType:"json",
+      contentType:"application/json;charset=UTF-8",
+      success:function(data) {
+        console.log(data);
+        let categorys = $.parseJSON(data);
+        console.log(categorys.length);
+
+        for (i in categorys) {
+          let old = $("#messageDivs").html();
+          let category = categorys[i];
+          $("#messageDivs").html(old + "<br>" + category.id + "   -----   " + category.name);
+        }
+      }
+    });
+  });
+</script>
+</body>
+</html>

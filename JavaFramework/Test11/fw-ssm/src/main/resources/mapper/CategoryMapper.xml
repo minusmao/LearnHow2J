@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+               "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.CategoryMapper">
+    <insert id="add" parameterType="Category" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO category (name) VALUES (#{name})
+    </insert>
+
+    <delete id="delete" parameterType="_int">
+        DELETE FROM category WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="Category">
+        UPDATE category SET name = #{name} WHERE id = #{id}
+    </update>
+
+    <select id="get" parameterType="_int" resultType="Category">
+        SELECT * FROM category WHERE id = #{id}
+    </select>
+
+    <select id="list" parameterType="com.example.util.Page" resultType="Category">
+        SELECT * FROM category
+        <choose>
+            <when test="start!=null and count!=null">
+                LIMIT #{start}, #{count}
+            </when>
+            <otherwise>
+                LIMIT 5
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="total" resultType="_int">
+        SELECT COUNT(*) FROM category
+    </select>
+
+    <select id="listPage" resultType="Category">
+        SELECT * FROM category
+    </select>
+</mapper>

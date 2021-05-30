@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           https://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <!-- 开启 Spring 注解功能 -->
+    <context:annotation-config/>
+    <!-- 通过注解，将 Service 的生命周期纳入Spring的管理 -->
+    <context:component-scan base-package="com.example.service"/>
+
+    <!-- 配置数据源 -->
+<!--
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost/how2java"/>
+        <property name="username" value="techrice"/>
+        <property name="password" value="123456"/>
+    </bean>
+-->
+    <!-- 配置数据源，并配置数据库连接池 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <!-- 基本属性 url、user、password -->
+        <property name="url" value="jdbc:mysql://localhost/how2java?characterEncoding=UTF-8" />
+        <property name="username" value="techrice" />
+        <property name="password" value="123456" />
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="3" />
+        <property name="minIdle" value="3" />
+        <property name="maxActive" value="20" />
+
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="60000" />
+
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />
+
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+
+        <property name="validationQuery" value="SELECT 1" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <property name="poolPreparedStatements" value="true" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+    </bean>
+
+    <!-- 配置 Mybatis 的 SqlSessionFactoryBean -->
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 注入 pojo 类的包名，这样在 XxxMapper.xml 文件中使用这些类时，就不用写包名 -->
+        <property name="typeAliasesPackage" value="com.example.pojo" />
+        <!-- 注入上文配置好的数据源 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 注入 XxxMapper.xml 文件的位置（存放 SQL 语句的 xml 文件） -->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <!-- 注入插件 -->
+        <property name="plugins">
+            <array>
+                <!-- pagehelper 分页插件（注意：版本 5.0.0 以下使用 com.github.pagehelper.PageHelper） -->
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <value>
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
+    <!-- 配置 Mybatis 的 MapperScannerConfigurer -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 注入 Mapper 类的包名，用于 Mybatis 扫描 Mapper 类，并将其生命周期纳入 Spring 的管理 -->
+        <property name="basePackage" value="com.example.mapper"/>
+    </bean>
+
+    <!-- 添加事务管理器和事务注解扫描器 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+</beans>
