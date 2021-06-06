@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vue.js 监听属性</title>
+        <script src="https://how2j.cn/study/vue.min.js"></script>
+        <style>
+            table tr td{
+                border:1px solid gray;
+                padding:10px;
+                  
+            }
+            table{
+                border-collapse:collapse;
+                width:800px;
+                table-layout:fixed;
+            }
+            tr.firstLine{
+                background-color: lightGray;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="div1">
+            <table>
+                <tr class="firstLine">
+                    <td>人民币</td>
+                    <td>美元</td>
+                </tr>      
+                <tr>
+                    <td colspan="2">
+                    汇率： <input type="number" v-model.number="exchange">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        ￥: <input type="number" v-model.number = "rmb">
+                    </td>
+                    <td>
+                        $: {{dollar}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <script>
+            new Vue({
+                el:"#div1",
+                data:{
+                    exchange:6.4,
+                    rmb:0,
+                    dollar:0
+                },
+                watch:{
+                    // 检测 rmb 的变化
+                    rmb:function(val){
+                        this.rmb=val;
+                        this.dollar=this.rmb/this.exchange;
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

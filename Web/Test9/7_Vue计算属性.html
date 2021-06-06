@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vue.js 计算属性</title>
+        <script src="https://how2j.cn/study/vue.min.js"></script>
+        <style>
+            table tr td{
+                border:1px solid gray;
+                padding:10px;
+                  
+            }
+            table{
+                border-collapse:collapse;
+                width:800px;
+                table-layout:fixed;
+            }
+            tr.firstLine{
+                background-color: lightGray;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="div1">
+            <h4>不用 computed ，直接在 {{}} 上运行</h4>
+            <table>
+                <tr class="firstLine">
+                    <td>人民币</td>
+                    <td>美元</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        汇率：<input type="text" v-model.number="hui">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        ￥: <input type="text" v-model.number="ren">
+                    </td>
+                    <td>$: {{ren/hui}}</td>
+                </tr>
+            </table>
+            <h4>使用 computed 时，有缓存</h4>
+            <table>
+                <tr class="firstLine">
+                    <td>人民币</td>
+                    <td>美元</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        汇率：<input type="text" v-model.number="hui">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        ￥: <input type="text" v-model.number="ren">
+                    </td>
+                    <td>$: {{mei}}</td>
+                </tr>
+            </table>
+            <h4>使用 methods 时，无缓存</h4>
+            <table>
+                <tr class="firstLine">
+                    <td>人民币</td>
+                    <td>美元</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        汇率：<input type="text" v-model.number="hui">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        ￥: <input type="text" v-model.number="ren">
+                    </td>
+                    <td>$: {{getMei()}}</td>
+                </tr>
+            </table>
+        </div>
+        <script>
+            new Vue({
+                el:"#div1",
+                data:{
+                    hui:6.4,
+                    ren:0
+                },
+                methods:{
+                    getMei:function(){
+                        return this.ren/this.hui;
+                    }
+                },
+                computed:{
+                    mei:function(){
+                        return this.ren/this.hui;
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

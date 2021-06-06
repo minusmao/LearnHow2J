@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vue.js 属性绑定</title>
+        <script src="https://how2j.cn/study/vue.min.js"></script>
+    </head>
+    <body>
+        <div id="div1">
+            <a v-bind:href="url">百度连接>>></a><br>
+            <a :href="url">百度连接>>></a><br>
+        </div>
+        <script>
+            new Vue({
+                el:"#div1",
+                data:{
+                    url:"https://www.baidu.com"
+                }
+            });
+        </script>
+    </body>
+</html>

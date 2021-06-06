@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vue.js 循环语句</title>
+        <script src="https://how2j.cn/study/vue.min.js"></script>
+        <style>
+            table tr td{
+                border: 1px solid gray;
+            }
+            table{
+                width: 300px;
+                border-collapse: collapse;
+            }
+            tr.firstLine{
+                background-color: lightgray;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="div1">
+            <table>
+                <tr class="firstLine">
+                    <td>name</td>
+                    <td>hp</td>
+                </tr>
+                <tr v-for="hero in heros">
+                    <td>{{hero.name}}</td>
+                    <td>{{hero.hp}}</td>
+                </tr>
+            </table>
+            <h4>可以再加个索引值</h4>
+            <table>
+                <tr class="firstLine">
+                    <td>index</td>
+                    <td>name</td>
+                    <td>hp</td>
+                </tr>
+                <tr v-for="hero,index in heros">
+                    <td>{{index}}</td>
+                    <td>{{hero.name}}</td>
+                    <td>{{hero.hp}}</td>
+                </tr>
+            </table>
+            <h4>纯数字遍历</h4>
+            <table>
+                <tr class="firstLine">
+                    <td>i in 10</td>
+                    <td>索引</td>
+                </tr>
+                <tr v-for="i,n in 10">
+                    <td>{{i}}</td>
+                    <td>{{n}}</td>
+                </tr>
+            </table>
+        </div>
+        <script>
+            // 准备数据
+            let data = [
+                {"name":"hero1","hp":111},
+                {"name":"hero2","hp":222},
+                {"name":"hero3","hp":333},
+                {"name":"hero4","hp":444}
+            ];
+            // Vue
+            new Vue({
+                el:"#div1",
+                data:{
+                    heros:data
+                }
+            });
+        </script>
+    </body>
+</html>

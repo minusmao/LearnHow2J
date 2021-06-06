@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vue.js 监听事件</title>
+        <script src="https://how2j.cn/study/vue.min.js"></script>
+    </head>
+    <body>
+        <div id="div1">
+            一共点击了{{clickNum}}次
+            <button v-on:click="count">点击</button>
+            <button @click="count">点击</button>
+            <br>
+            <h4>冒泡现象</h4>
+            <!--
+                v-on:click.stop        阻止冒泡
+                v-on:click.capture     优先触发
+                v-on:click.self        只有自己能触发，子元素无法触发
+                v-on:click.once        点击一次之后，就不会再监听到 click 了
+            -->
+            <div id="grandfather" v-on:click.self="doc" style="width: fit-content; padding: 10px; background-color: red;">
+                grandfather
+                <div id="father" v-on:click.once="doc" style="width: fit-content; padding: 10px; background-color: blue;">
+                    father
+                    <div id="me" @click="doc" style="width: auto; padding: 10px; background-color: green;">
+                        me
+                        <div id="son" v-on:click.stop="doc" style="width: fit-content; padding: 10px; background-color:yellow">
+                            son
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h4>阻止提交</h4>
+            <div>
+                <a href="http://www.baidu.com" @click="jump">正常连接 http://www.baidu.com</a><br>
+                <a href="http://www.baidu.com" @click.prevent="jump">加了 .prevent="jump" 的连接</a><br>
+                <a href="http://www.baidu.com" @click.prevent>只加了 .prevent 的连接</a><br>
+                <form v-on:submit.prevent="jump" action="http://www.baidu.com">
+                    <button type="submit">点击</button>
+                </form>
+            </div>
+        </div>
+        <script>
+            new Vue({
+                el:"#div1",
+                data:{
+                    id:'',
+                    clickNum:0
+                },
+                methods:{
+                    count:function(){
+                        this.clickNum++;
+                    },
+                    doc:function(){
+                        this.id=event.currentTarget.id;    // 得到该 div 的 id 属性
+                        alert(this.id + "被点击");
+                    },
+                    jump:function(){
+                        alert("jump 被调用");
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

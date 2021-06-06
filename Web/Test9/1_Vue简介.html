@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vue.js 简介</title>
+        <script src="https://how2j.cn/study/vue.min.js"></script>
+    </head>
+    <body>
+        <div id="div1">
+            {{hero.name}}
+        </div>
+        <script>
+            //准备数据
+            let hero = {"name":"HelloVue","hp":616};
+            //通过vue.js 把数据和对应的视图关联起来
+            new Vue({
+                el:'#div1',
+                data:{
+                    message:hero
+                }
+            });
+        </script>
+    </body>
+</html>

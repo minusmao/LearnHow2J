@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vue.js 过滤器</title>
+        <script src="https://how2j.cn/study/vue.min.js"></script>
+        <style>
+            table tr td{
+                border:1px solid gray;
+                padding:10px;
+                  
+            }
+            table{
+                border-collapse:collapse;
+                width:800px;
+                table-layout:fixed;
+            }
+            tr.firstLine{
+                background-color: lightGray;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="div1">
+            <table>
+                <tr class="firstLine">
+                    <td>输入的数据</td>
+                    <td>过滤后结果</td>
+                </tr>
+                <tr>
+                    <td><input type="text" v-model="input"></td>
+                    <td>{{input|startUp|endUp}}</td>
+                </tr>
+            </table>
+        </div>
+        <script>
+            // 全局过滤器，尾字母大写
+            Vue.filter("endUp", function(value){
+                        if(value != null){
+                            value = value.toString();
+                            end = value.charAt(value.length-1).toUpperCase();
+                            return value.substring(0, value.length-1) + end;
+                        }
+                    });
+            new Vue({
+                el:"#div1",
+                data:{
+                    input:""
+                },
+                filters:{
+                    // 首字母大写
+                    startUp:function(value){
+                        if(value != null){
+                            value = value.toString();
+                            start = value.charAt(0).toUpperCase();
+                            return start + value.substring(1);
+                        }
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vue.js 条件语句</title>
+        <script src="https://how2j.cn/study/vue.min.js"></script>
+    </head>
+    <body>
+        <div id="div1">
+            <h4>v-if</h4>
+            <div v-if="show">默认这一条是看得见的</div>
+            <button v-on:click="toggle">切换</button>
+            <h4>v-else-if</h4>
+            <div v-if="num>8">{{num}}大于8</div>
+            <div v-else-if="num>6">{{num}}大于6</div>
+            <div v-else-if="num>4">{{num}}大于4</div>
+            <div v-else>{{num}}小于4</div>
+            <button v-on:click="rand">生成 0~10 之间的随机数</button>
+        </div>
+        <script>
+            new Vue({
+                el:"#div1",
+                data:{
+                    show:true,
+                    num:0
+                },
+                methods:{
+                    toggle:function(){
+                        this.show=!this.show
+                    },
+                    rand:function(){
+                        this.num=Math.random()*10;    // 生成 0~10 之间的随机数
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

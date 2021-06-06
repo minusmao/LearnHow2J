@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vue.js 双向绑定</title>
+        <script src="https://how2j.cn/study/vue.min.js"></script>
+        <style>
+            table tr td{
+                border:1px solid gray;
+                padding:10px;
+                 
+            }
+            table{
+                border-collapse:collapse;
+                width:800px;
+                table-layout:fixed;
+            }
+            tr.firstLine{
+                background-color: lightGray;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="div1">
+            <h4>v-model 双向绑定</h4>
+            hero name: <input v-model="name">
+            <button v-on:click="show">输入的内容</button>
+            <br>
+            <h4>多种风格数据的绑定</h4>
+            <table>
+                <tr class="firstLine">
+                    <td>类型</td>
+                    <td>输入数据</td>
+                    <td>绑定到Vue上的数值</td>
+                </tr>
+                <tr>
+                    <td>单行文本</td>
+                    <td><input type="text" v-model="input"></td>
+                    <td>{{input}}</td>
+                </tr>
+                <tr>
+                    <td>多行文本</td>
+                    <td><textarea v-model="textarea"></textarea></td>
+                    <td>{{textarea}}</td>
+                </tr>
+                <tr>
+                    <td>单个复选框</td>
+                    <td><input type="checkbox" v-model="checked"></td>
+                    <td>{{checked}}</td>
+                </tr>
+                <tr>
+                    <td>多个复选框</td>
+                    <td>
+                        <input type="checkbox" id="hero1" value="hero1" v-model="checks">
+                        <label for="hero1">hero1</label>
+                        <input type="checkbox" id="hero2" value="hero2" v-model="checks">
+                        <label for="hero2">hero2</label>
+                        <input type="checkbox" id="hero3" value="hero3" v-model="checks">
+                        <label for="hero3">hero3</label>
+                    </td>
+                    <td>{{checks}}</td>
+                </tr>
+                <tr>
+                    <td>单选按钮</td>
+                    <td>
+                        <input type="radio" id="first" value="first" v-model="rad">
+                        <label for="first">first</label>
+                        <input type="radio" id="second" value="second" v-model="rad">
+                        <label for="second">second</label>
+                    </td>
+                    <td>{{rad}}</td>
+                </tr>
+                <tr>
+                    <td>单选选择框</td>
+                    <td>
+                        <select v-model="selected">
+                            <option disabled value="">请选择</option>
+                            <option>AD</option>
+                            <option>AP</option>
+                            <option>ADC</option>
+                        </select>
+                    </td>
+                    <td>{{selected}}</td>
+                </tr>
+                <tr>
+                    <td>多选选择框</td>
+                    <td>
+                        <select v-model="selects" multiple size="4">
+                            <option disabled value="">请选择</option>
+                            <option>AD</option>
+                            <option>AP</option>
+                            <option>ADC</option>
+                        </select>
+                    </td>
+                    <td>{{selects}}</td>
+                </tr>
+                <tr>
+                    <td>单个复选框</td>
+                    <td>
+                        默认值是true或者false,也可以修改为自定义的值<br>
+                        <input type="checkbox" true-value="yes" false-value="no" v-model="toggle">
+                    </td>
+                    <td>{{toggle}}</td>
+                </tr>
+                <tr>
+                    <td>修饰符 .lazy</td>
+                    <td>
+                        只有在失去焦点的时候，才会进行数据绑定了<br>
+                        <input type="text" v-model.lazy="lazy">
+                    </td>
+                    <td>{{lazy}}</td>
+                </tr>
+                <tr>
+                    <td>修饰符 .number</td>
+                    <td>
+                        v-model 默认是 string 类型，修饰符 .number 开启自动转换为 number 类型
+                        <input type="text" v-model.number="number">
+                    </td>
+                    <td>值：{{number}}，数据类型：{{typeof number}}</td>
+                </tr>
+                <tr>
+                    <td>修饰符 .trim</td>
+                    <td>
+                        trim 去掉前后的空白
+                        <input type="text" v-model.trim="trim">
+                    </td>
+                    <td>{{trim}}</td>
+                </tr>
+            </table>
+        </div>
+        <script>
+            new Vue({
+                el:"#div1",
+                data:{
+                    name:"hello",
+                    input:"",
+                    textarea:"",
+                    checked:"true",
+                    checks:[],
+                    rad:"",
+                    selected:"",
+                    selects:[],
+                    toggle:"",
+                    lazy:"",
+                    number:"",
+                    trim:""
+                },
+                methods:{
+                    show:function(){
+                        alert("输入的内容："+this.name);
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
