@@ -1,4 +1,2 @@
 # ignore .class files
 *.class
-# ignore .jar files
-*.jar
