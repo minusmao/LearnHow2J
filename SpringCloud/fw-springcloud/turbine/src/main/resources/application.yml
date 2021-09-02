@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: turbine
+
+# 配置 turbine
+turbine:
+  aggregator:
+    cluster-config: default
+  app-config: product-view-service-feign  # 监控的服务服务
+  cluster-name-expression: new String("default")
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: product-view-service-feign
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    mode: HTML5
+    servlet:
+      content-type: text/html
+  # 配置 zipkin 服务链路追踪
+  zipkin:
+    base-url: http://localhost:9411
+
+# 开启断路器
+feign:
+  hystrix:
+    enabled: true
+
+# eureka 配置（加上了配置服务的客户端，于 2021-08-25 移至 bootstrap）
+#eureka:
+#  client:
+#    service-url:
+#      default-zone: http://localhost:8761/eureka/
+
+# 配置允许访问 /actuator/bus-refresh
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"

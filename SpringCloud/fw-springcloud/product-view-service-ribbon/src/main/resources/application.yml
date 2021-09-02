@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: product-view-service-ribbon
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    mode: HTML5
+    servlet:
+      content-type: text/html
+
+# eureka 配置
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka/

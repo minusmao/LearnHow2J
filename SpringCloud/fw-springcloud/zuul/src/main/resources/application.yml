@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: product-service-zuul
+
+# 配置 Zuul 网关
+zuul:
+  routes:
+    api-a:
+      path: /api-data/**
+      serviceId: PRODUCT-DATA-SERVICE
+    api-b:
+      path: /api-view/**
+      serviceId: PRODUCT-VIEW-SERVICE-FEIGN
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

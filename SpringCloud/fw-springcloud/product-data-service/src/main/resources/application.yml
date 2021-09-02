@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: product-data-service
+  # 配置 zipkin 服务链路追踪
+  zipkin:
+    base-url: http://localhost:9411
+
+# eureka 配置
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka/

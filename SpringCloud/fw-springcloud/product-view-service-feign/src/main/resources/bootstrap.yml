@@ -1,0 +1,28 @@
+spring:
+  cloud:
+    config:
+      label: master
+      profile: dev
+      discovery:
+        enabled: true
+        service-id: config-server
+    # Bus 总线配置
+    bus:
+      enabled: true
+      trace:
+        enabled: true
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka/
+
+  # RabbitMQ 配置
+  rabbitmq:
+    host: 192.168.164.129
+    port: 5672
+#    username: guest
+#    password: guest
+#    guest用户只能本机访问，远程访问会报错：https://www.freesion.com/article/189650703/
+#    新建用户和授权：https://blog.csdn.net/hdn_kb/article/details/94553386
+    username: TechRice
+    password: 123456
+    virtual-host: /
